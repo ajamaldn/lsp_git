@@ -8,13 +8,23 @@ class M_admin extends CI_Model
 
     public function dt_barang()
     {
-        $this->db->select('b.* , g.*');
+        $this->db->select('b.*, g.*');
         $this->db->from('barang b');
         $this->db->join('gudang g', 'g.id_gudang = b.id_gudang', 'left');
 
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function dt_gudang()
+    {
+        $this->db->select('*');
+        $this->db->from('gudang');
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 
     public function dt_barang_add()
     {

@@ -43,7 +43,8 @@ if ($page == 'dashboard') {
                                     <td><?= $brg['jumlah'] ?></td>
                                     <td><?= $brg['nama_gudang'] ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editBarang<?= $brg['id_barang'] ?>">Edit</button> <a href="<?= base_url("admin/hapus") ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editBarang<?= $brg['id_barang'] ?>"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <a href="<?= base_url("admin/del_barang/") . $brg['id_barang'] ?>" class="btn btn-danger btn-del"><i class="fas fa-trash-alt"></i></a>
                                     </td>
 
                                 </tr>
@@ -69,18 +70,26 @@ if ($page == 'dashboard') {
                         <div class="form-group">
                             <label>Nama Barang</label>
                             <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan nama barang" required>
+                            <div class="invalid-feedback">
+                                Nama barang tidak boleh kosong!
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Jumlah</label>
-                            <input type="text" class="form-control" name="jumlah" placeholder="Masukkan jumlah barang" required>
+                            <input type="number" class="form-control" name="jumlah" placeholder="Masukkan jumlah barang" required>
+                            <div class="invalid-feedback">
+                                Jumlah tidak boleh kosong!
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Gudang</label>
-                            <select class="form-control" name="id_gudang">
-                                <option value="">Pilih Gudang</option>
-                                <?php foreach ($barang as $brg) { ?>
-                                    <option value="<?= $brg['id_gudang']; ?>"><?= $brg['nama_gudang']; ?></option>
+                            <select class="form-control" name="id_gudang" required>
+                                <?php foreach ($gudang as $g) { ?>
+                                    <option value="<?= $g['id_gudang']; ?>"><?= $g['nama_gudang']; ?></option>
                                 <?php } ?>
+                                <div class="invalid-feedback">
+                                    Gudang tidak boleh kosong!
+                                </div>
                             </select>
                         </div>
                     </div>
@@ -107,18 +116,28 @@ if ($page == 'dashboard') {
                             <div class="form-group">
                                 <label>Nama Barang</label>
                                 <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan nama barang" value="<?= $brg['nama_barang'] ?>" required>
+                                <div class="invalid-feedback">
+                                    Nama barang tidak boleh kosong!
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Jumlah</label>
-                                <input type="text" class="form-control" name="jumlah" placeholder="Masukkan jumlah barang" value="<?= $brg['jumlah'] ?>" required>
+                                <input type="number" class="form-control" name="jumlah" placeholder="Masukkan jumlah barang" value="<?= $brg['jumlah'] ?>" required>
+                                <div class="invalid-feedback">
+                                    Jumlah tidak boleh kosong!
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Gudang</label>
                                 <select class="form-control" name="id_gudang">
-                                    <option value="<?= $brg['id_gudang'] ?>"><?= $brg['nama_gudang'] ?></option>
-                                    <?php foreach ($barang as $brg) { ?>
-                                        <option value="<?= $brg['id_gudang']; ?>"><?= $brg['nama_gudang']; ?></option>
+                                    <?php foreach ($gudang as $g) { ?>
+                                        <option value="<?= $g['id_gudang'] ?>" <?= set_select('id_gudang', $brg['id_gudang'], $brg['id_gudang'] == $g['id_gudang']) ?>>
+                                            <?= $g['nama_gudang'] ?>
+                                        </option>
                                     <?php } ?>
+                                    <div class="invalid-feedback">
+                                        Gudang tidak boleh kosong!
+                                    </div>
                                 </select>
                             </div>
                         </div>

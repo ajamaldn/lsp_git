@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<?= base_url(); ?>assets/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/adminlte/plugins/toastr/toastr.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -41,7 +42,7 @@
                         <img src="<?= base_url(); ?>assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block"><?= $user['username']; ?></a>
                     </div>
                 </div>
                 <nav class="mt-2">
@@ -52,7 +53,7 @@
                         ?>
                         <li class="nav-item">
                             <a href="<?= base_url('admin'); ?>" class="nav-link <?php if (in_array($page, $menu1)) echo "active"; ?>">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="fa-solid fa-table-list"></i>
                                 <p>
                                     Dashboard
 
@@ -61,9 +62,17 @@
                         </li>
                         <li class="nav-item">
                             <a href="../widgets.html" class="nav-link <?php if (in_array($page, $menu2)) echo "active"; ?>">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-table-list"></i>
                                 <p>
                                     Widgets
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="Logout()">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <p>
+                                    Logout
                                 </p>
                             </a>
                         </li>
@@ -71,3 +80,4 @@
                 </nav>
             </div>
         </aside>
+        <div id="flash" data-flash="<?= $this->session->flashdata('success'); ?>"></div>
